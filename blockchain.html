@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Block Height</title>
+</head>
+<body>
+  <button id="getBlockHeightBtn">Get Block Height</button>
+  <div id="blockHeight"></div>
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+  <script>
+    const getBlockHeightBtn = document.getElementById('getBlockHeightBtn');
+    const blockHeightDiv = document.getElementById('blockHeight');
+    const web3 = new Web3(window.ethereum);
+
+    async function getBlockHeight() {
+      try {
+        await window.ethereum.enable();
+        const blockNumber = await web3.eth.getBlockNumber();
+        blockHeightDiv.innerHTML = `Current block height: ${blockNumber}`;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    getBlockHeightBtn.addEventListener('click', getBlockHeight);
+  </script>
+</body>
+</html>
